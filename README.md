@@ -1,5 +1,9 @@
 # flutter_mvvm
 
+![alt-text]('https://github.com/FarbodRajabi/mvvm/blob/main/flutter_mvvm.gif')
+
+
+
 A new Flutter project.
 
 ## Getting Started
