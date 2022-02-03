@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+
+import 'package:provider/provider.dart';
+
+import 'package:flutter_mvvm/utils/navigation_utils.dart';
 import 'package:flutter_mvvm/components/user_card_widget.dart';
 import 'package:flutter_mvvm/users_list/models/users_list_model.dart';
 import 'package:flutter_mvvm/users_list/view_model/users_view_model.dart';
-import 'package:flutter_mvvm/utils/navigation_utils.dart';
-import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -31,7 +33,7 @@ class HomeScreen extends StatelessWidget {
 
   _ui(UserViewModel userViewModel) {
     if (userViewModel.loading) {
-      return CircularProgressIndicator();
+      return const Center(child: CircularProgressIndicator());
     }
 
     return Expanded(
