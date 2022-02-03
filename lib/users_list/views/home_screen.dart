@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_mvvm/components/user_card_widget.dart';
 import 'package:flutter_mvvm/users_list/models/users_list_model.dart';
 import 'package:flutter_mvvm/users_list/view_model/users_view_model.dart';
+import 'package:flutter_mvvm/utils/navigation_utils.dart';
 import 'package:provider/provider.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -11,9 +13,13 @@ class HomeScreen extends StatelessWidget {
     UserViewModel userViewModel = context.watch<UserViewModel>();
 
     return Scaffold(
-      backgroundColor: Colors.grey,
-      appBar: AppBar(),
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        title: const Center(child: Text('Users')),
+      ),
       body: Container(
+        margin: const EdgeInsets.symmetric(vertical: 8.0),
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
         child: Column(
           children: [
             _ui(userViewModel),
@@ -32,8 +38,12 @@ class HomeScreen extends StatelessWidget {
       child: ListView.separated(
           itemBuilder: (context, index) {
             UserModel user = userViewModel.userListModel[index];
-            return Container(
-              child: Text(user.name),
+            return UserCard(
+              user: user,
+              onTap: () {
+                userViewModel.setSelectedUser(user);
+                openUserDetails(context);
+              },
             );
           },
           separatorBuilder: (context, indext) {
