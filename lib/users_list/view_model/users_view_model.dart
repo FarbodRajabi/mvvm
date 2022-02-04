@@ -8,12 +8,12 @@ import 'package:flutter_mvvm/users_list/models/users_list_model.dart';
 class UserViewModel extends ChangeNotifier {
   bool _isLoading = false;
   List<UserModel> _userListModel = [];
-  late UserError _userError;
+  UserError? _userError;
   UserModel? _selectedUser;
 
   bool get loading => _isLoading;
   List<UserModel> get userListModel => _userListModel;
-  UserError get userError => _userError;
+  UserError? get userError => _userError;
   UserModel? get selectedUser => _selectedUser;
 
   UserViewModel() {
@@ -36,6 +36,10 @@ class UserViewModel extends ChangeNotifier {
 
   setSelectedUser(UserModel userModel) {
     _selectedUser = userModel;
+  }
+
+  clearUserError() {
+    _userError = null;
   }
 
   getUsers() async {

@@ -1,5 +1,8 @@
 const String USERS_LIST = 'https://jsonplaceholder.typicode.com/users';
 
+// success
+const SUCCESS = 200;
+
 // errors
 const USER_INVALID_RESPONSE = 100;
 const NO_INTERNET = 101;

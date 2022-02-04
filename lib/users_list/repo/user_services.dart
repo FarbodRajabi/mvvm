@@ -12,7 +12,8 @@ class UserServices {
       var url = Uri.parse(USERS_LIST);
       var response = await http.get(url);
       if (response.statusCode == 200) {
-        return Success(code: 200, response: UserModelFromJson(response.body));
+        return Success(
+            code: SUCCESS, response: UserModelFromJson(response.body));
       }
       return Failure(
           code: USER_INVALID_RESPONSE, errorResponse: 'Invalid Response');
@@ -20,6 +21,8 @@ class UserServices {
       return Failure(code: NO_INTERNET, errorResponse: 'No Internet');
     } on FormatException {
       return Failure(code: INVALID_FORMAT, errorResponse: 'Invalid Format');
+    } on SocketException {
+      return Failure(code: NO_INTERNET, errorResponse: 'Connection Failed');
     } catch (e) {
       return Failure(code: UNKNOWN_ERROR, errorResponse: 'Unknown Error');
     }

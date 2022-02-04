@@ -35,6 +35,30 @@ class HomeScreen extends StatelessWidget {
     if (userViewModel.loading) {
       return const Center(child: CircularProgressIndicator());
     }
+    if (userViewModel.userError != null) {
+      return Expanded(
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                userViewModel.userError!.message.toString(),
+                style: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 22,
+                ),
+              ),
+              ElevatedButton(
+                  onPressed: () {
+                    userViewModel.clearUserError();
+                    userViewModel.getUsers();
+                  },
+                  child: const Text('Retry')),
+            ],
+          ),
+        ),
+      );
+    }
 
     return Expanded(
       child: ListView.separated(
@@ -49,7 +73,7 @@ class HomeScreen extends StatelessWidget {
             );
           },
           separatorBuilder: (context, indext) {
-            return Divider();
+            return const Divider();
           },
           itemCount: userViewModel.userListModel.length),
     );
